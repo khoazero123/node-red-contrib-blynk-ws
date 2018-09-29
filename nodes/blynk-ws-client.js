@@ -321,7 +321,21 @@ module.exports = function(RED) {
 							payload: command.value,
 							pin: command.pin,
 						};
-
+						switch (command.operation) {
+							case 'dw':
+								msg.pin_type = 'digital';
+								break;
+							case 'vw':
+								msg.pin_type = 'virtual';
+								break;
+							case 'aw':
+								msg.pin_type = 'analog';
+								break;
+						
+							default:
+								console.error(command);
+								break;
+						}
 						if (command.array) {
 							msg.arrayOfValues = command.array;
 						}
@@ -376,7 +390,21 @@ module.exports = function(RED) {
 				msg = {
 					payload: command.pin
 				};
+                switch (command.operation) {
+                    case 'dr':
+                        msg.pin_type = 'digital';
+                        break;
+                    case 'vr':
+                        msg.pin_type = 'virtual';
+                        break;
+                    case 'ar':
+                        msg.pin_type = 'analog';
+                        break;
                 
+                    default:
+                        console.error(command);
+                        break;
+                }
 				if(this.dbg_all || this.dbg_read || this.isLogPin(command.pin)){
 					this.log("readEvent: -> output " + JSON.stringify(msg));
 				}

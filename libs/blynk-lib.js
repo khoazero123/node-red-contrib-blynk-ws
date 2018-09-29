@@ -189,9 +189,11 @@ var processCommand = function (cmd) {
 			//this.warn(cmd.typeString+" cmd: " + JSON.stringify(cmd));
 			switch (cmd.operation) {
 			//input nodes
+			case "dw":
 			case "vw":
 				this.handleWriteEvent(cmd);
 				break;
+			case "dr":
 			case "vr":
 				this.handleReadEvent(cmd);
 				break;
